@@ -1,15 +1,16 @@
-1. [ Libraries ](#libraries)
-2. [ Examples ](#examples)
+# Arduino + RPi remote watering
+## Project layout
 
-<a name="libraries"></a>
-<!-- ## 1. Libraries -->
-
-# Libraries/ 
-[How to import library in IDE](https://www.arduino.cc/en/guide/libraries#toc4)
-
-<a name="examples"></a>
-<!-- ## 2. Examples -->
-
-# Examples/
-Programite trqbva da se otvorqt v Arduino IDE i da se kachat na platkata.
-V sluchei che ima greshka za lipsvashta biblioteka vij [libs](../libs)
+    mkdocs.yml           # The configuration file.
+    docs/
+        index.md         # The documentation homepage.
+        ...              # Other markdown pages, images and other files.
+    examples/            # direktoriqta sudurja gotovi za kachvane primeri
+        example.ino      # Arduino IDE sketch
+        ...
+    libs/                # Vsichki nujni biblioteki v zip arhivi
+        externalLib.zip  # naprimer
+        ...
+    sketches/            # Sudurja programite napisani ot nas
+        sketch.ino
+        ...
