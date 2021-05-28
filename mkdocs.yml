@@ -1,0 +1,134 @@
+# Project info
+site_name: arduino-project
+site_url: https://z.rootnode.duckdns.org/46265z/arduino-project # https://46265z.github.io/IoT-dev-setup/
+site_author: Alexander A. Parvanov
+site_description: >-
+  arduino template repository
+
+# Repository
+repo_name: 46265z/arduino-project
+repo_url: https://z.rootnode.duckdns.org/46265z/arduino-project
+# edit_url: ""
+
+theme:
+  name: material
+    
+    # 404 page
+  static_templates:
+    - 404.html
+
+    # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+    
+    # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - header.autohide
+    - navigation.instant
+    - navigation.sections
+    - navigation.tabs
+  palette:
+    scheme: default
+    primary: indigo
+    accent: indigo
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: logo
+
+# Plugins
+plugins:
+  - search
+  # - pdf-export
+  # - redirects:
+  #     redirect_maps:
+  #       extensions/admonition.md: reference/admonitions.md
+  #       extensions/codehilite.md: reference/code-blocks.md
+  #       extensions/footnotes.md: reference/footnotes.md
+  #       extensions/metadata.md: reference/meta-tags.md
+  #       extensions/permalinks.md: setup/setting-up-navigation.md #permalink
+  #       extensions/pymdown.md: reference/admonitions.md
+  #       plugins/revision-date.md: setup/adding-a-git-repository.md #revision-date
+  #       plugins/search.md: setup/setting-up-site-search.md
+  #       releases/4.md: upgrading.md #upgrading-from-4x-to-5x
+  #       releases/5.md: upgrading.md #upgrading-from-3x-to-4x
+  #       releases/changelog.md: changelog.md
+  #       setup/adding-social-links.md: setup/setting-up-the-footer.md
+  #       sponsorship.md: insiders.md
+  - minify:
+      minify_html: true
+
+# Extensions
+markdown_extensions:
+  - admonition
+  - abbr
+  - attr_list
+  - def_list
+  - footnotes
+  - meta
+  - md_in_html
+  - pymdownx.snippets:
+      base_path: docs
+  - toc:
+      permalink: true
+      # slugify: !!python/name:pymdownx.slugs.uslugify
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.critic:
+      mode: view
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: 46265z
+      repo: arduino-project
+  - pymdownx.mark
+  - pymdownx.caret
+  - pymdownx.tilde
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+# Page tree
+nav:
+  - Home: index.md
+  # - How To:
+  #   - Setup device: setup-device.md
+  #   - Connect device: connect-device.md
+  #   - Setup Pybytes project: setup-pybytes-project.md
+  #   - Import: import-code-from-github.md
+  #   - Deploy: deploy-to-edge-device.md
+  #   - Integrate webhook: integrate-webhook.md
+  #   - Test the hook(Mock webhook service/backend/endpoint): test-pybytes-webhook.md
+  # - Devices:
+  #   - Expansion board: devices/expansion-board.md
+  #   - Pyscan: devices/pyscan.md
+  #   - Pysense2x: devices/pysense2x.md
+  #   - Pytrack2x: devices/pytrack2x.md
+  #   - Higrow wroom32: devices/higrow-wroom32.md
+  #   - Smart Watering: devices/smart-watering.md
+  #   - Wemos Lolin: devices/wemos-lolin.md
+  #   - UNO WIFI: devices/uno-wifi.md
+  #   - Sodaq Sara: devices/sodaq-sara-aff.md
+  # - Modules:
+  #   - MH-RTC-2: modules/mh-rtc-2.md
+  #   - Next-mod: modules/next-mod-template.md
+  # - List:
+  #   - Device list: devices/list-of-devices.md
