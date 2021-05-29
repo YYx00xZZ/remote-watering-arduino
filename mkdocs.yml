@@ -1,13 +1,13 @@
 # Project info
-site_name: arduino-project
-site_url: https://z.rootnode.duckdns.org/46265z/arduino-project # https://46265z.github.io/IoT-dev-setup/
+site_name: remote-watering
+site_url: https://z.rootnode.duckdns.org/46265z/remote-watering # https://46265z.github.io/IoT-dev-setup/
 site_author: Alexander A. Parvanov
 site_description: >-
   arduino template repository
 
 # Repository
-repo_name: 46265z/arduino-project
-repo_url: https://z.rootnode.duckdns.org/46265z/arduino-project
+repo_name: 46265z/remote-watering
+repo_url: https://z.rootnode.duckdns.org/46265z/remote-watering
 # edit_url: ""
 
 theme:
@@ -28,6 +28,7 @@ theme:
     - navigation.instant
     - navigation.sections
     - navigation.tabs
+    - navigation.indexes
   palette:
     scheme: default
     primary: indigo
@@ -46,7 +47,7 @@ plugins:
   # - redirects:
   #     redirect_maps:
   #       extensions/admonition.md: reference/admonitions.md
-  #       extensions/codehilite.md: reference/code-blocks.md
+        # extensions/codehilite.md: reference/code-blocks.md
   #       extensions/footnotes.md: reference/footnotes.md
   #       extensions/metadata.md: reference/meta-tags.md
   #       extensions/permalinks.md: setup/setting-up-navigation.md #permalink
@@ -86,17 +87,18 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
-  - pymdownx.highlight
-  - pymdownx.inlinehilite
   - pymdownx.keys
   - pymdownx.magiclink:
       repo_url_shorthand: true
       user: 46265z
-      repo: arduino-project
+      repo: remote-watering
   - pymdownx.mark
   - pymdownx.caret
   - pymdownx.tilde
   - pymdownx.smartsymbols
+  - pymdownx.highlight:
+      linenums: true
+  - pymdownx.inlinehilite
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
@@ -108,7 +110,11 @@ markdown_extensions:
 
 # Page tree
 nav:
-  - Home: index.md
+  - Project layout: index.md
+  - Examples:
+    - Getting started: examples/getting-started.md
+    - Auto Water: examples/auto-water.md
+    # - Auto Water: 
   # - How To:
   #   - Setup device: setup-device.md
   #   - Connect device: connect-device.md
