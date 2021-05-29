@@ -77,6 +77,7 @@ void setup()
 ```
 
 Also we have to define the function for reading sensors' values. It will be used in the loop, so it is important to mark that we have to set a little delay between readings, otherwise personally I experienced poor performance. 
+For each sensor; we read its value, map it to percents and assign the new value to variable
 
 ```c++ linenums="189" hl_lines="16 22 28 34"
 void read_value()
@@ -112,3 +113,5 @@ the code is reduced for clarity; if your project uses resistor sensors, refer to
 	}
 }
 ```
+
+We have defined function `void water_flower()` which basically turn on watering for sensor which value is below 30% and is watering while it reaches 55% 
