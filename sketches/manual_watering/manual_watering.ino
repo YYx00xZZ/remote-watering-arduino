@@ -171,35 +171,43 @@ void loop()
   if (Serial.available()) {
     command = Serial.readStringUntil('\n');
     // komandi vkluch./izkluch. za vsqko rele
-    if (command.equals("relay1_on")){
-      digitalWrite(relay1,HIGH);
+    if (command.equals("relay1_on")) {
+      //      digitalWrite(relay1,HIGH);
+      relay1_state_flag = 1;
     }
     else if (command.equals("relay1_off")) {
-      digitalWrite(relay1,LOW);
+      //      digitalWrite(relay1,LOW);
+      relay1_state_flag = 0;
     }
     else if (command.equals("relay2_on")) {
-      digitalWrite(relay2,HIGH);
+      //      digitalWrite(relay2,HIGH);
+      relay2_state_flag = 1;
     }
     else if (command.equals("relay2_off")) {
-      digitalWrite(relay2,LOW);
+      //      digitalWrite(relay2,LOW);
+      relay2_state_flag = 0;
     }
     else if (command.equals("relay3_on")) {
-      digitalWrite(relay3,HIGH);
+      //      digitalWrite(relay3,HIGH);
+      relay3_state_flag = 1;
     }
     else if (command.equals("relay3_off")) {
-      digitalWrite(relay3,LOW);
+      //      digitalWrite(relay3,LOW);
+      relay3_state_flag = 0;
     }
     else if (command.equals("relay4_on")) {
-      digitalWrite(relay4,HIGH);
+      //      digitalWrite(relay4,HIGH);
+      relay4_state_flag = 1;
     }
     else if (command.equals("relay4_off")) {
-      digitalWrite(relay4,LOW);
+      //      digitalWrite(relay4,LOW);
+      relay4_state_flag = 0;
     }
     else if (command.equals("pump_on")) {
-      digitalWrite(pump,HIGH);
+      digitalWrite(pump, HIGH);
     }
     else if (command.equals("pump_off")) {
-      digitalWrite(pump,LOW);
+      digitalWrite(pump, LOW);
       Serial.println("pump low");
     }
     else if (command.equals("read_values")) {
@@ -213,6 +221,13 @@ void loop()
       Serial.println(moisture2_raw_value);
       Serial.println(moisture3_raw_value);
       Serial.println(moisture4_raw_value);
+    }
+    else if (command.equals("pump")) {
+      while (Serial.available() == 0) {
+        // Wait for User to Input Data
+      }
+      int seconds_to_water = Serial.parseInt();
+      pump_it(seconds_to_water);
     }
   }
   int button_state = digitalRead(button);
@@ -237,7 +252,46 @@ void loop()
     } while (u8g.nextPage());
   }
 }
-
+void pump_it(int secs_to_water) {
+  if (relay1_state_flag == 1) {
+    digitalWrite(relay1, HIGH); delay(10);
+  }
+  else if (relay1_state_flag == 0) {
+    digitalWrite(relay1, LOW); delay(10);
+  }
+  else if (relay2_state_flag == 1) {
+    digitalWrite(relay2, HIGH); delay(10);
+  }
+  else if (relay2_state_flag == 0) {
+    digitalWrite(relay2, LOW); delay(10);
+  }
+  else if (relay3_state_flag == 1) {
+    digitalWrite(relay3, HIGH); delay(10);
+  }
+  else if (relay3_state_flag == 0) {
+    digitalWrite(relay3, LOW); delay(10);
+  }
+  else if (relay4_state_flag == 1) {
+    digitalWrite(relay4, HIGH); delay(10);
+  }
+  else if (relay4_state_flag == 0) {
+    digitalWrite(relay4, LOW); delay(10);
+  }
+  digitalWrite(pump, HIGH);
+  delay(secs_to_water * 1000);
+  digitalWrite(pump, LOW); delay(10);
+  turn_all_off();
+}
+void turn_all_off() {
+  relay1_state_flag = 0;
+  digitalWrite(relay1, LOW); delay(2);
+  relay2_state_flag = 0;
+  digitalWrite(relay2, LOW); delay(2);
+  relay3_state_flag = 0;
+  digitalWrite(relay3, LOW); delay(2);
+  relay4_state_flag = 0;
+  digitalWrite(relay4, LOW); delay(2);
+}
 //Set moisture value
 void read_value()
 {
@@ -253,140 +307,38 @@ void read_value()
    **********************************************************/
   /************These is for capacity moisture sensor*********/
   float value1 = analogRead(A0);
-//  Serial.print("VALUE 1 IS :  ");
-//  Serial.println(value1);
-  moisture1_value = map(value1, 590, 360, 0, 100);moisture1_raw_value=value1; delay(20);
+  //  Serial.print("VALUE 1 IS :  ");
+  //  Serial.println(value1);
+  moisture1_value = map(value1, 590, 360, 0, 100); moisture1_raw_value = value1; delay(20);
   if (moisture1_value < 0) {
     moisture1_value = 0;
   }
   float value2 = analogRead(A1);
-//  Serial.print("VALUE 2 IS :  ");
-//  Serial.println(value2);
-  moisture2_value = map(value2, 600, 360, 0, 100);moisture2_raw_value=value2; delay(20);
+  //  Serial.print("VALUE 2 IS :  ");
+  //  Serial.println(value2);
+  moisture2_value = map(value2, 600, 360, 0, 100); moisture2_raw_value = value2; delay(20);
   if (moisture2_value < 0) {
     moisture2_value = 0;
   }
   float value3 = analogRead(A2);
-//  Serial.print("VALUE 3 IS :  ");
-//  Serial.println(value3);
-  moisture3_value = map(value3, 600, 360, 0, 100);moisture3_raw_value=value3; delay(20);
+  //  Serial.print("VALUE 3 IS :  ");
+  //  Serial.println(value3);
+  moisture3_value = map(value3, 600, 360, 0, 100); moisture3_raw_value = value3; delay(20);
   if (moisture3_value < 0) {
     moisture3_value = 0;
   }
   float value4 = analogRead(A3);
-//  Serial.print("VALUE 4 IS :  ");
-//  Serial.println(value4);
-  moisture4_value = map(value4, 600, 360, 0, 100);moisture4_raw_value=value4; delay(20);
+  //  Serial.print("VALUE 4 IS :  ");
+  //  Serial.println(value4);
+  moisture4_value = map(value4, 600, 360, 0, 100); moisture4_raw_value = value4; delay(20);
   if (moisture4_value < 0) {
     moisture4_value = 0;
   }
 }
 
-void water_flower()
-{
-  if (moisture1_value < 30)
-  {
-    digitalWrite(relay1, HIGH);
-    relay1_state_flag = 1;
-    delay(50);
-    if (pump_state_flag == 0)
-    {
-      digitalWrite(pump, HIGH);
-      pump_state_flag = 1;
-      delay(50);
-    }
-  }
-  else if (moisture1_value > 55)
-  {
-    digitalWrite(relay1, LOW);
-    relay1_state_flag = 0;
-    delay(50);
-    if ((relay1_state_flag == 0) && (relay2_state_flag == 0) && (relay3_state_flag == 0) && (relay4_state_flag == 0))
-    {
-      digitalWrite(pump, LOW);
-      pump_state_flag = 0;
-      delay(50);
-    }
-  }
-
-  if (moisture2_value < 30)
-  {
-    digitalWrite(relay2, HIGH);
-    relay2_state_flag = 1;
-    delay(50);
-    if (pump_state_flag == 0)
-    {
-      digitalWrite(pump, HIGH);
-      pump_state_flag = 1;
-      delay(50);
-    }
-  }
-  else if (moisture2_value > 55)
-  {
-    digitalWrite(relay2, LOW);
-    relay2_state_flag = 0;
-    delay(50);
-    if ((relay1_state_flag == 0) && (relay2_state_flag == 0) && (relay3_state_flag == 0) && (relay4_state_flag == 0))
-    {
-      digitalWrite(pump, LOW);
-      pump_state_flag = 0;
-      delay(50);
-    }
-  }
-
-  if (moisture3_value < 30)
-  {
-    digitalWrite(relay3, HIGH);
-    relay3_state_flag = 1;
-    delay(50);
-    if (pump_state_flag == 0)
-    {
-      digitalWrite(pump, HIGH);
-      pump_state_flag = 1;
-      delay(50);
-    }
-  }
-  else if (moisture3_value > 55)
-  {
-    digitalWrite(relay3, LOW);
-    relay3_state_flag = 0;
-    delay(50);
-    if ((relay1_state_flag == 0) && (relay2_state_flag == 0) && (relay3_state_flag == 0) && (relay4_state_flag == 0))
-    {
-      digitalWrite(pump, LOW);
-      pump_state_flag = 0;
-      delay(50);
-    }
-  }
-
-  if (moisture4_value < 30)
-  {
-    digitalWrite(relay4, HIGH);
-    relay4_state_flag = 1;
-    delay(50);
-    if (pump_state_flag == 0)
-    {
-      digitalWrite(pump, HIGH);
-      pump_state_flag = 1;
-      delay(50);
-    }
-  }
-  else if (moisture4_value > 55)
-  {
-    digitalWrite(relay4, LOW);
-    relay4_state_flag = 0;
-    delay(50);
-    if ((relay1_state_flag == 0) && (relay2_state_flag == 0) && (relay3_state_flag == 0) && (relay4_state_flag == 0))
-    {
-      digitalWrite(pump, LOW);
-      pump_state_flag = 0;
-      delay(50);
-    }
-  }
-
-}
-
-
+//void water_flower()
+//{
+//}
 
 void draw_elecrow(void) {
 

@@ -114,6 +114,8 @@ nav:
   - Examples:
     - Getting started: examples/getting-started.md
     - Auto Water: examples/auto-water.md
+  - Sketches:
+    Manual watering:
     # - Auto Water: 
   # - How To:
   #   - Setup device: setup-device.md
