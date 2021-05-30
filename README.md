@@ -1,4 +1,4 @@
-# Arduino + RPi remote watering
+# Arduino remote watering
 <!-- ## Project layout -->
 
 ## [Podrobna dokumentaciq](https://z.rootnode.duckdns.org/46265z/remote-watering)
