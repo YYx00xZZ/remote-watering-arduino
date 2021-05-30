@@ -75,7 +75,7 @@ void setup()
   delay(2000);
   Wire.begin();
   RTC.begin();
-  Serial.begin(9600);
+  Serial.begin(115200);
   // declare relay as output
   pinMode(relay1, OUTPUT);
   pinMode(relay2, OUTPUT);
@@ -93,6 +93,7 @@ void loop()
 {
   // read the value from the moisture sensors:
   read_value(); // chete stoinostite na senzorite postoqnno v loop
+  delay(20);
   //  water_flower();
   if (Serial.available()) {
     command = Serial.readStringUntil('\n');
