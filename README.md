@@ -1,7 +1,7 @@
 # Arduino remote watering
 <!-- ## Project layout -->
 
-## [Podrobna dokumentaciq](https://z.rootnode.duckdns.org/46265z/remote-watering)
+<!-- ## [Podrobna dokumentaciq](https://z.rootnode.duckdns.org/46265z/remote-watering) -->
 
 ## Project layout
 
